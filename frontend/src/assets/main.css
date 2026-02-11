@@ -1,10 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
   body {
-    @apply text-gray-800;
+    color: var(--color-gray-800);
   }
 }
 
@@ -61,3 +59,160 @@
 .progress-orange { @apply bg-orange-500; }
 .progress-yellow { @apply bg-yellow-500; }
 .progress-green { @apply bg-green-500; }
+
+/* ===== GAMIFICATION ANIMATIONS ===== */
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Bounce in */
+@keyframes bounce-in {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-bounce-in {
+  animation: bounce-in 0.5s ease-out forwards;
+}
+
+/* Pulse glow for release button */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50% { box-shadow: 0 0 20px 4px rgba(34, 197, 94, 0.3); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Slow ping for notification dots */
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 1; }
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+.animate-ping-slow {
+  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Slow spin for achievement star */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Level up animation */
+@keyframes level-up {
+  0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+  30% { transform: scale(1.3) rotate(5deg); opacity: 1; }
+  50% { transform: scale(1) rotate(-3deg); }
+  70% { transform: scale(1.1) rotate(1deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.animate-level-up {
+  animation: level-up 0.8s ease-out forwards;
+}
+
+/* Slide down for notifications */
+@keyframes slide-down {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
+}
+
+/* Shimmer on XP bar */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Achievement pop animation */
+@keyframes achievement-pop {
+  0% { transform: translateX(100%) scale(0.8); opacity: 0; }
+  30% { transform: translateX(-10px) scale(1.05); opacity: 1; }
+  50% { transform: translateX(5px) scale(0.98); }
+  100% { transform: translateX(0) scale(1); }
+}
+.animate-achievement-pop {
+  animation: achievement-pop 0.6s ease-out;
+}
+
+/* === Vue Transitions === */
+
+/* Toast transition */
+.toast-enter-active {
+  animation: achievement-pop 0.5s ease-out;
+}
+.toast-leave-active {
+  transition: all 0.4s ease-in;
+}
+.toast-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* Slide in for achievement panel */
+.slide-in-enter-active,
+.slide-in-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-in-enter-from .w-96,
+.slide-in-leave-to .w-96 {
+  transform: translateX(100%);
+}
+.slide-in-enter-from,
+.slide-in-leave-to {
+  background-color: transparent;
+}
+
+/* Level up transition */
+.level-up-enter-active {
+  transition: all 0.5s ease;
+}
+.level-up-leave-active {
+  transition: all 0.8s ease;
+}
+.level-up-enter-from {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.level-up-leave-to {
+  opacity: 0;
+  transform: scale(1.5);
+}
+
+/* XP pop */
+.xp-pop-enter-active {
+  animation: bounce-in 0.4s ease-out;
+}
+.xp-pop-leave-active {
+  transition: all 0.3s ease;
+}
+.xp-pop-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Field complete transition */
+.field-complete-move {
+  transition: transform 0.5s ease;
+}

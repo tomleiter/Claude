@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   backend:
-    image: php:8.2-cli
+    image: php:8.5-rc-cli
     working_dir: /app
     volumes:
       - ./backend:/app
@@ -13,7 +11,7 @@ services:
       - PHP_CLI_SERVER_WORKERS=4
 
   frontend:
-    image: node:20-slim
+    image: node:22-slim
     working_dir: /app
     volumes:
       - ./frontend:/app

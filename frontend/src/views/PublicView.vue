@@ -62,9 +62,9 @@
       <!-- Center: Form fields -->
       <main ref="mainContent" class="flex-1 overflow-y-auto p-6">
         <div v-if="!selectedFolderId" class="flex flex-col items-center justify-center h-full text-gray-400">
-          <span class="text-6xl mb-4 animate-float">📋</span>
-          <p class="text-lg">Ordner auswählen um das Formular auszufüllen</p>
-          <p class="text-sm mt-1">Los geht's! Jedes Feld bringt XP.</p>
+          <MascotIllustration :percent="0" :size="220" />
+          <p class="text-lg mt-4">Ordner auswählen um das Formular auszufüllen</p>
+          <p class="text-sm mt-1 text-gray-400">Jedes Feld bringt dir XP und schaltet Achievements frei!</p>
         </div>
         <div v-else-if="currentFolderData">
           <h2 class="text-xl font-bold mb-2">{{ selectedFolderName }}</h2>
@@ -230,14 +230,20 @@
           <span class="font-semibold text-sm">Status & Fortschritt</span>
         </div>
         <div v-if="currentFolderData" class="p-3 space-y-4">
-          <!-- Big progress ring -->
-          <div class="flex justify-center py-2">
-            <ProgressRing
+          <!-- Mascot + progress -->
+          <div class="flex flex-col items-center py-2">
+            <MascotIllustration
               :percent="currentFolderData.completion?.percent ?? 0"
-              :size="120"
-              :stroke-width="8"
-              label="Gesamt"
+              :size="150"
             />
+            <div class="mt-3">
+              <ProgressRing
+                :percent="currentFolderData.completion?.percent ?? 0"
+                :size="90"
+                :stroke-width="6"
+                label="Gesamt"
+              />
+            </div>
           </div>
 
           <!-- Streak counter -->
@@ -338,6 +344,7 @@ import AchievementPanel from '../components/AchievementPanel.vue'
 import AchievementToast from '../components/AchievementToast.vue'
 import ConfettiEffect from '../components/ConfettiEffect.vue'
 import StreakCounter from '../components/StreakCounter.vue'
+import MascotIllustration from '../components/MascotIllustration.vue'
 
 const route = useRoute()
 const api = useApi()
